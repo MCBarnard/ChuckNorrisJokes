@@ -2,7 +2,7 @@
 
 namespace Mcbarnard\ChuckNorrisJokes\Facades;
 
-use Illuminate\Support\Facades\Facade; 
+use Illuminate\Support\Facades\Facade;
 
 class ChuckNorris extends Facade
 {
