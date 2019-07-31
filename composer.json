@@ -30,7 +30,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Mcbarnard\\ChuckNorrisJokes\\ChuckNorrisJokesProvider"
+                "Mcbarnard\\ChuckNorrisJokes\\ChuckNorrisJokesServiceProvider"
             ],
             "aliases": {
                 "ChuckNorris": "Mcbarnard\\ChuckNorrisJokes\\Facades\\ChuckNorris"
