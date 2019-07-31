@@ -3,7 +3,6 @@
 namespace Mcbarnard\ChuckNorrisJokes;
 
 use Illuminate\Support\ServiceProvider;
-use Mcbarnard\ChuckNorrisJokes\JokeFactory;
 
 class ChuckNorrisJokesServiceProvider extends ServiceProvider
 {
