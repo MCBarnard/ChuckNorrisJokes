@@ -3,6 +3,13 @@
 namespace Mcbarnard\ChuckNorrisJokes\Tests;
 
 use PHPUnit\Framework\TestCase;
+
+use GuzzleHttp\Client;
+use GuzzleHttp\Handler\MockHandler;
+use GuzzleHttp\HandlerStack;
+use GuzzleHttp\Psr7\Response;
+use GuzzleHttp\Psr7\Request;
+
 use Mcbarnard\ChuckNorrisJokes\JokeFactory;
 
 class JokeFactoryTest extends TestCase
@@ -10,26 +17,17 @@ class JokeFactoryTest extends TestCase
     /** @test */
     public function it_returns_a_random_joke()
     {
-        $jokes = new JokeFactory([
-        'Add a joke here',
-    ]);
-        $joke = $jokes->getRandomJoke();
-        $this->assertSame('Add a joke here', $joke);
-    }
+        $mock = new MockHandler([
+            new Response(200, [], '{ "type": "success", "value": { "id": 441, "joke": "Chuck Norris did not &quot;lose&quot; his virginity, he stalked it and then destroyed it with extreme prejudice.", "category": [] } }'),
+        ]);
 
-    /** @test */
-    public function it_returns_a_predefined_joke()
-    {
-        $chuckNorrisJokes = [
-        'Chuck Norris does not wear a condom. Because there is no such thing as protection from Chuck Norris.',
-        "Chuck Norris' tears cure cancer. Too bad he has never cried.",
-        'Chuck Norris counted to infinity... Twice.',
-        "If you can see Chuck Norris, he can see you. If you can't see Chuck Norris you may be only seconds away from death.",
-        'There is no theory of evolution. Just a list of animals Chuck Norris allows to live.',
-    ];
-        $jokes = new JokeFactory();
+        $handler = HandlerStack::create($mock);
+
+        $client = new Client(['handler' => $handler]);
+       
+        $jokes = new JokeFactory($client);
         $joke = $jokes->getRandomJoke();
 
-        $this->assertContains($joke, $chuckNorrisJokes);
+        $this->assertSame('Chuck Norris did not &quot;lose&quot; his virginity, he stalked it and then destroyed it with extreme prejudice.', $joke);
     }
 }
