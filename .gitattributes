@@ -1,4 +1,4 @@
-/.gitignor          export-ignore
+/.gitignore         export-ignore
 /.travis.yml        export-ignore
 /.styleci.yml       export-ignore
 /.tests             export-ignore
