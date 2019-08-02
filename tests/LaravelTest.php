@@ -3,26 +3,27 @@
 namespace Mcbarnard\ChuckNorrisJokes\Tests;
 
 use Orchestra\Testbench\TestCase;
-use Mcbarnard\ChuckNorrisJokes\ChuckNorrisJokesServiceProvider;
-use Mcbarnard\ChuckNorrisJokes\Console\ChuckNorrisJoke;
 use Illuminate\Support\Facades\Artisan;
 use Mcbarnard\ChuckNorrisJokes\Facades\ChuckNorris;
-
+use Mcbarnard\ChuckNorrisJokes\Console\ChuckNorrisJoke;
+use Mcbarnard\ChuckNorrisJokes\ChuckNorrisJokesServiceProvider;
 
 class LaravelTest extends TestCase
 {
     protected function getPackageProviders($app)
     {
         return [
-            ChuckNorrisJokesServiceProvider::class
+            ChuckNorrisJokesServiceProvider::class,
         ];
     }
+
     protected function getPackageAliases($app)
     {
         return [
-            'ChuckNorris' => ChuckNorrisJoke::class
+            'ChuckNorris' => ChuckNorrisJoke::class,
         ];
     }
+
     /**  @test */
     public function the_console_command_returns_a_joke()
     {
@@ -32,6 +33,6 @@ class LaravelTest extends TestCase
             ->andReturn('some joke');
         $this->artisan('chuck-norris');
         $output = Artisan::output();
-        $this->assertSame('some joke'.PHP_EOL , $output);
+        $this->assertSame('some joke'.PHP_EOL, $output);
     }
 }
